@@ -9,7 +9,8 @@ GitHub Pages에 그대로 올릴 수 있는 정적 사이트 (빌드 과정 없�
 | `content.js` | **모든 내용** (소개, 프로젝트, 수치, 그래프 데이터, 링크) | 내용·수치를 바꿀 때 — 대부분 이 파일만 고치면 됨 |
 | `style.css` | 색·글꼴·배치 | 디자인을 바꿀 때 |
 | `app.js` | `content.js`를 화면으로 그리는 코드 | 새 종류의 칸이 필요할 때만 |
-| `index.html` | 뼈대 | 거의 안 고침 |
+| `index.html` | 메인 페이지 뼈대 (소개·기술·연락처·대표 프로젝트·목록) | 거의 안 고침 |
+| `project.html` | 프로젝트 상세 페이지 뼈대. `project.html?id=docentalk`처럼 `content.js`의 `id`로 열림 | 거의 안 고침 |
 | `pdf/summary.html` → `pdf/portfolio_summary.pdf` | 제출용 A4 요약본 | 내용이 바뀌면 같이 고친 뒤 PDF 다시 만들기 |
 
 ## 자주 하는 수정

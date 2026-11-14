@@ -76,8 +76,18 @@
     return `<figure>${body}${withCaption ? `<figcaption>${f.caption}</figcaption>` : ""}</figure>`;
   };
 
-  /* ---------- hero bento ---------- */
   const P = D.profile;
+  const url = (id) => `project.html?id=${encodeURIComponent(id)}`;
+  const isDetail = document.body.dataset.page === "project";
+
+  /* ---------- 상단 메뉴 (두 페이지 공용) ---------- */
+  const currentId = new URLSearchParams(location.search).get("id");
+  $("#nav").innerHTML =
+    `<a href="index.html#about">기술·연락처</a>` +
+    D.projects.map(p => `<a href="${url(p.id)}"${isDetail && p.id === currentId ? ' class="on"' : ""}>${p.short || p.title}</a>`).join("");
+  $("#updated").textContent = P.updated;
+
+  /* ---------- hero bento ---------- */
   const hero = `
     <div class="tile hero wide span-4">
       <div class="hero-left">
@@ -96,7 +106,7 @@
 
   const hl = D.highlights.map(h => {
     const proj = D.projects.find(p => p.id === h.project) || {};
-    return `<a class="tile story span-2 c-${proj.color || "blue"}" href="#${h.project}">
+    return `<a class="tile story span-2 c-${proj.color || "blue"}" href="${url(h.project)}">
       <div class="story-text">
         <div class="story-label">${h.label}</div>
         <div class="story-head">${h.headline}</div>
@@ -108,21 +118,17 @@
   }).join("");
 
   const index = D.projects.map((p, i) => `
-    <a class="tile index-tile c-${p.color}${p.status ? " live" : ""}" href="#${p.id}">
+    <a class="tile index-tile c-${p.color}${p.status ? " live" : ""}" href="${url(p.id)}">
       <div class="idx-no">${String(i + 1).padStart(2, "0")}</div>
       <div class="idx-title">${p.title}</div>
       <div class="idx-tag">${fmt(p.tagline)}</div>
       <div class="idx-kind">${p.status ? `<span class="status">${p.status}</span>` : p.kind}</div>
     </a>`).join("");
 
-  $("#hero-bento").innerHTML = hero;
-  $("#top-bento").innerHTML = hl;
-  $("#index").innerHTML = index;
-
-  /* ---------- projects ---------- */
+  /* ---------- 프로젝트 상세 (project.html) ---------- */
   const list = (arr) => `<ul>${arr.map(x => `<li>${fmt(x)}</li>`).join("")}</ul>`;
 
-  const projects = D.projects.map((p, i) => {
+  function renderProject(p, i) {
     const no = String(i + 1).padStart(2, "0");
     let h = `<section class="proj c-${p.color}" id="${p.id}"><div class="bento">`;
 
@@ -172,10 +178,31 @@
       ${p.notice ? `<p class="notice">${p.notice}</p>` : ""}</div>`;
 
     return h + `</div></section>`;
-  }).join("");
-  $("#projects").innerHTML = projects;
+  }
 
-  /* ---------- about ---------- */
+  if (isDetail) {
+    const i = D.projects.findIndex(p => p.id === currentId);
+    if (i < 0) {
+      $("#detail").innerHTML = `<div class="tile notfound"><h2>프로젝트를 찾을 수 없음</h2><p><a href="index.html">전체 보기로 돌아가기</a></p></div>`;
+    } else {
+      const p = D.projects[i];
+      const prev = D.projects[(i - 1 + D.projects.length) % D.projects.length];
+      const next = D.projects[(i + 1) % D.projects.length];
+      const pager = `<nav class="pager">
+          <a class="tile" href="${url(prev.id)}"><span>← 이전 프로젝트</span><b>${prev.title}</b></a>
+          <a class="tile all" href="index.html"><span>전체 보기</span><b>목록으로</b></a>
+          <a class="tile next" href="${url(next.id)}"><span>다음 프로젝트 →</span><b>${next.title}</b></a>
+        </nav>`;
+      $("#detail").innerHTML = `<a class="back" href="index.html">← 전체 보기</a>` + renderProject(p, i) + pager;
+      document.title = `${p.title} · ${P.name} 포트폴리오`;
+    }
+  }
+
+  /* ---------- 메인 페이지 (index.html) ---------- */
+  if (!isDetail) {
+  $("#hero-bento").innerHTML = hero;
+  $("#top-bento").innerHTML = hl;
+  $("#index").innerHTML = index;
   $("#about").innerHTML = `<div class="bento">
     <div class="tile span-2"><h3>기술</h3><dl class="kv">${D.skills.map(([k, v]) => `<div><dt>${k}</dt><dd>${fmt(v)}</dd></div>`).join("")}</dl><p class="note">${fmt(D.skillsNote)}</p></div>
     <div class="tile span-1"><h3>교육</h3><dl class="kv stack">${D.education.map(([k, v]) => `<div><dt>${k}</dt><dd>${fmt(v)}</dd></div>`).join("")}</dl></div>
@@ -183,8 +210,8 @@
       <div><dt>이메일</dt><dd>${fmt(P.email)}</dd></div><div><dt>전화</dt><dd>${fmt(P.phone)}</dd></div>
       <div><dt>GitHub</dt><dd><a href="https://github.com/${P.github}"${ext("https://")}>github.com/${P.github}</a></dd></div></dl></div>
   </div>`;
-  $("#updated").textContent = P.updated;
   document.title = `${P.name} 포트폴리오`;
+  }
 
   /* ---------- reveal on scroll ---------- */
   const tiles = document.querySelectorAll(".tile");

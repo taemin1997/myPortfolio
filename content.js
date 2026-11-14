@@ -101,6 +101,7 @@ window.PORTFOLIO = {
     {
       id: "compare-agent",
       title: "Compare Agent 2.1",
+      short: "Compare Agent",
       status: "진행 중",
       kind: "최종 팀 프로젝트",
       tagline: "TODO: 한 줄 요약",
@@ -120,6 +121,7 @@ window.PORTFOLIO = {
     {
       id: "docentalk",
       title: "Docentalk 3차 → 4차",
+      short: "Docentalk",
       kind: "팀 · 2026.10–11",
       tagline: "기능은 그대로 두고 서버를 바꾼 RAG 도슨트",
       desc: "팀이 수집·검수한 자료 안에서만 답하고 출처를 보여 주는 AI 도슨트 온라인 미술관",
@@ -248,6 +250,7 @@ window.PORTFOLIO = {
       id: "seoul",
       compact: true,
       title: "서울 상권 폐업 위험 예측",
+      short: "상권 예측",
       kind: "팀 · 2026.08",
       tagline: "불균형 데이터에서 정확도 대신 순위로 보여 준 예측",
       desc: "상가업소 스냅샷 6회와 생활인구 데이터로 상권·업종별 폐업 위험도를 계산하는 웹 앱",
