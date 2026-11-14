@@ -191,6 +191,8 @@ figcaption { font-size: 12.5px; color: var(--muted); margin-top: 10px; line-heig
 .kv > div:first-child { border-top: none; }
 .kv dt { font-size: 13px; color: var(--muted); font-weight: 600; }
 .kv dd { margin: 0; font-size: 14.5px; }
+.about-top { margin-top: 14px; }
+.kv.stack > div { grid-template-columns: 1fr; gap: 0; }
 .kv.row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 20px; }
 .kv.row > div { border-top: none; grid-template-columns: 70px 1fr; }
 

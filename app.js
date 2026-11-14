@@ -92,7 +92,6 @@
         <a class="btn light" href="${P.pdf}">PDF 버전 보기</a>
         <a class="btn ghost" href="https://github.com/${P.github}"${ext("https://")}>GitHub</a>
       </div>
-      <div class="hero-contact"><span>이메일 ${fmt(P.email)}</span><span>전화 ${fmt(P.phone)}</span></div>
       </div>
     </div>`;
 
@@ -117,7 +116,8 @@
       <div class="idx-kind">${p.status ? `<span class="status">${p.status}</span>` : p.kind}</div>
     </a>`).join("");
 
-  $("#top-bento").innerHTML = hero + hl;
+  $("#hero-bento").innerHTML = hero;
+  $("#top-bento").innerHTML = hl;
   $("#index").innerHTML = index;
 
   /* ---------- projects ---------- */
@@ -179,8 +179,8 @@
   /* ---------- about ---------- */
   $("#about").innerHTML = `<div class="bento">
     <div class="tile span-2"><h3>기술</h3><dl class="kv">${D.skills.map(([k, v]) => `<div><dt>${k}</dt><dd>${fmt(v)}</dd></div>`).join("")}</dl><p class="note">${fmt(D.skillsNote)}</p></div>
-    <div class="tile span-2"><h3>교육</h3><dl class="kv">${D.education.map(([k, v]) => `<div><dt>${k}</dt><dd>${fmt(v)}</dd></div>`).join("")}</dl></div>
-    <div class="tile span-4 contact-tile"><h3>연락처</h3><dl class="kv row">
+    <div class="tile span-1"><h3>교육</h3><dl class="kv stack">${D.education.map(([k, v]) => `<div><dt>${k}</dt><dd>${fmt(v)}</dd></div>`).join("")}</dl></div>
+    <div class="tile span-1 contact-tile"><h3>연락처</h3><dl class="kv stack">
       <div><dt>이메일</dt><dd>${fmt(P.email)}</dd></div><div><dt>전화</dt><dd>${fmt(P.phone)}</dd></div>
       <div><dt>GitHub</dt><dd><a href="https://github.com/${P.github}"${ext("https://")}>github.com/${P.github}</a></dd></div></dl></div>
   </div>`;
