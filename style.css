@@ -78,7 +78,7 @@ a.tile.story { display: flex; flex-direction: column; gap: 16px; border-top: 6px
 .story-more { display: inline-block; margin-top: 6px; font-size: 13px; font-weight: 700; color: var(--pc); }
 .story-fig { background: var(--pc-soft); border-radius: 14px; padding: 12px; }
 .hero.wide { display: grid; grid-template-columns: 1.1fr 1fr; gap: 8px 48px; align-items: end; }
-.hero.wide .hero-left h1 { margin-top: 22px; }
+.hero.wide .hero-left h1 { margin-top: 0; }
 .hero.wide .hero-right .hero-actions { margin-top: 18px; padding-top: 0; }
 @media (max-width: 1000px) { .hero.wide { grid-template-columns: 1fr; } }
 

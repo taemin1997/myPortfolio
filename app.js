@@ -81,7 +81,6 @@
   const hero = `
     <div class="tile hero wide span-4">
       <div class="hero-left">
-        <div class="hero-top"><span class="pill">${P.org}</span></div>
         <h1>${P.name}</h1>
         <p class="hero-role">${P.role}</p>
       </div>
